@@ -1,0 +1,39 @@
+<div class="wrapper">
+
+
+  <div class="container">
+    <h2>Input Elements</h2>
+    <div cdkDropList #element="cdkDropList" [cdkDropListData]="elementsList" [cdkDropListConnectedTo]="[elementDrop]"
+      class="element-list" (cdkDropListDropped)="onDrop($event)">
+      <div class="element-block" *ngFor="let element of elementsList" cdkDrag>{{element?.inputType}}</div>
+    </div>
+  </div>
+  <div class="container">
+    <h2>Canvas</h2>
+    <div cdkDropList #elementDrop="cdkDropList" [cdkDropListData]="droppedItems" [cdkDropListConnectedTo]="[element]"
+      class="element-list" (cdkDropListDropped)="onAnyDrop($event)">
+
+      <div>
+        <li *ngFor="let elementDrop of droppedItems">
+          <input [type]="elementDrop.inputType" [placeholder]="elementDrop.placeholder"
+            *ngIf="elementDrop.inputType !== 'label'">
+          <label *ngIf="elementDrop.inputType === 'label'"></label>
+          <label *ngIf="elementDrop.displayText"></label>
+        </li>
+      </div>
+
+
+    </div>
+  </div>
+  <div class="container">
+    <h2>HTML CODE</h2>
+    <div [innerHTML]="finalString"></div>
+
+    <div class="col-sm-4">
+      {{finalString}}
+    </div>
+  </div>
+
+
+</div>
+
